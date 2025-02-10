@@ -1,0 +1,69 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+<div class="container">
+    <!-- Cabeçalho -->
+    <div class="row mb-3">
+        <div class="col d-flex justify-content-between align-items-center">
+            <h2>Usuários</h2>
+            <a class="btn btn-primary" href="#">
+                <i class="bi bi-plus-square"></i> Adicionar Usuário
+            </a>
+        </div>
+    </div>
+
+    <!-- Paginação -->
+    <div class="row">
+        <div class="col">
+            <nav aria-label="Navegação de página">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item {% if not Lista_usuarios.has_prev %}disabled{% endif %}">
+                        <a class="page-link" href="#" aria-label="Anterior">
+                            <i class="bi bi-skip-start"></i>
+                        </a>
+                    </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">{{ Lista_usuarios.page }} de {{ Lista_usuarios.pages }}</span>
+                    </li>
+                    <li class="page-item {% if not Lista_usuarios.has_next %}disabled{% endif %}">
+                        <a class="page-link" href="{{ url_for('index', page=Lista_usuarios.next_num) }}"
+                            aria-label="Próximo">
+                            <i class="bi bi-skip-end"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Tabela -->
+    <div class="table-responsive overflow-auto">
+        <table class="table table-striped align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for Lista_usuarios in Lista_usuarios.items %}
+                <tr>
+                    <td>{{ Lista_usuarios.nome }}</td>
+                    <td>{{ Lista_usuarios.email }}</td>
+                    <td>
+                        <a class="btn btn-primary me-2" href="#" title="Editar">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <a class="btn btn-danger" href="#" title="Apagar">
+                            <i class="bi bi-trash3-fill"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

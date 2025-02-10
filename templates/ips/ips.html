@@ -1,0 +1,65 @@
+{% extends "template.html" %}
+{% block conteudo %}
+<div class="container">
+    <!-- Cabeçalho -->
+    <div class="row mb-3">
+        <div class="col d-flex justify-content-between align-items-center">
+            <h2>Ip´s</h2>
+            <a class="btn btn-primary" href="{{ url_for('novo_ip') }}">
+                <i class="bi bi-plus-square"></i> Adicionar IP
+            </a>
+            <a class="btn btn-success" href="{{ url_for('gerar_pdf') }}" target="_blank" title="ABRE UM ARQUIVO PDF NO NAVEGADOR">
+                <i class="bi bi-file-earmark-pdf"></i> Gerar PDF
+            </a>
+        </div>
+    </div>
+    <form method="get" action="{{ url_for('index_ips') }}">
+        <div class="input-group mb-3">
+            <input type="text" name="search" class="form-control" placeholder="Buscar IPs" value="{{ termo_busca }}">
+            <button class="btn btn-primary" type="submit">Buscar</button>
+        </div>
+    </form>
+    <!-- Tabela -->
+     <div>  </div>
+    <div class="table-responsive overflow-auto">
+        <table class="table table-striped align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nº de Ips Cadastrados : </th> 
+                    <th colspan="4">{{total_ips}}</th>
+                </tr>
+                <tr>
+                    <th>Unidades</th>
+                    <th>Setores</th>
+                    <th>IPs</th>
+                    <th>Nome das Maquinas</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ip in lista_ips %}
+                <tr>
+                    
+                    <td>{{ ip.fantasia }}</td>
+                    <td>{{ ip.setor }}</td>
+                    <td>{{ ip.ip }}</td>
+                    <td>{{ ip.maquina }}</td>
+
+                   
+
+                    <td>
+                        <a class="btn btn-primary me-2" href="{{url_for('editar_ip', id=ip.id)}}" title="Editar">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <a class="btn btn-danger" href="{{url_for('apagar_ip', id=ip.id)}}" title="Apagar">
+                            <i class="bi bi-trash3-fill"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

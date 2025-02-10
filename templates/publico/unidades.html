@@ -1,0 +1,57 @@
+{% extends "index.html" %}
+{% block conteudo %}
+
+<div class="container mt-5">
+    <!-- Formulário de busca -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <form method="get" action="">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control" placeholder="Buscar lojas"
+                        value="{{ termo_busca }}">
+                    <button class="btn btn-primary" type="submit">Buscar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tabela de lojas -->
+    <div class="row">
+        <div class="col-12">
+            <h3 class="text-primary mb-3">Lista de Lojas</h3>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <tbody>
+                        {% for lojas in lista_lojas %}
+                        <tr >
+                            <th class="table-primary">Razão Social:</th>
+                            <td>{{ lojas.razao }}</td>
+                            <th class="table-primary">Unidades:</th>
+                            <td>{{ lojas.fantasia }}</td>
+                        </tr>
+                        <tr>
+                            <th class="table-primary">CNPJ:</th>
+                            <td>{{ lojas.cnpj }}</td>
+                            <th class="table-primary">Endereço:</th>
+                            <td>{{ lojas.endereco }}</td>
+                        </tr>
+                        <tr>
+                            <th class="table-primary">Inscrição:</th>
+                            <td>{{ lojas.ie }}</td>
+                            <th class="table-primary">CEP:</th>
+                            <td>{{ lojas.cep }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <hr class="my-2">
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

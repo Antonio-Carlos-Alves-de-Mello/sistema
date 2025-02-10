@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="Lojo.ico" type="image/x-icon">
+
+    <title>Sistema</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+
+
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="bg-primary text-white text-center py-2">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <span>Sistema Gerencial</span>
+            
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul id="messages" class="list-unstyled">
+            {% for message in messages %}
+            <li class="alert alert-success">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    </header>
+
+    <!-- Botão para abrir o menu lateral -->
+    
+
+    <!-- Menu Lateral -->
+    <div class="offcanvas offcanvas-start bg-primary text-white" tabindex="-1" id="offcanvasMenu"
+        aria-labelledby="offcanvasMenuLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url_for('index') }}">Produtos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url_for('index_fornecedores') }}">Fornecedores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url_for('index_tecnico') }}">Técnicos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url_for('index_ips') }}">IPs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url_for('index_Contatos') }}">Contatos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url_for('index_usuarios') }}">Usuários</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Estoque</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url_for('index_pedidos') }}">Pedidos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url_for('index_setores') }}">Setores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url_for('index_lojas') }}">Lojas</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container my-4">
+        {% block conteudo %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer bg-primary text-white text-center py-3 mt-auto">
+        <div class="container">
+            <span><i class="bi bi-c-circle"></i> 2024 Sistemas</span>
+            <span class="ms-3">Versão Beta</span>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script>
+        // Ocultar mensagens após 5 segundos
+        setTimeout(function () {
+            const flashMessage = document.querySelector('#messages');
+            if (flashMessage) {
+                flashMessage.style.display = 'none';
+            }
+        }, 5000);
+    </script>
+</body>
+
+</html>

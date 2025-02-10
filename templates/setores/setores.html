@@ -1,0 +1,69 @@
+{% extends "template.html" %} {% block conteudo %}
+
+<div class="container">
+  <!-- Cabeçalho -->
+  <div class="row mb-3">
+    <div class="col d-flex justify-content-between align-items-center">
+      <h2>Setores</h2>
+      <a class="btn btn-primary" href="{{url_for('novo_setores')}}">
+        <i class="bi bi-plus-square"></i> Adicionar Setor
+      </a>
+    </div>
+  </div>
+
+  <!-- Paginação -->
+  <div class="row">
+    <div class="col">
+      <form method="get" action="#">
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            name="search"
+            class="form-control"
+            placeholder="Buscar Setores"
+            value="{{ termo_busca }}"
+          />
+          <button class="btn btn-primary" type="submit">Buscar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Tabela -->
+  <div class="table-responsive overflow-auto">
+    <table class="table table-striped align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Setores</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if Lista_setores %}
+          {% for item in Lista_setores %}
+          <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.setor }}</td>
+            <td>
+              <a class="btn btn-primary me-2" href="{{url_for('editar_setor', id=item.id)}}" title="Editar">
+                <i class="bi bi-pencil-square"></i>
+              </a>
+              <a class="btn btn-danger" href="{{url_for('deletar_setor', id=item.id)}}" title="Apagar">
+                <i class="bi bi-trash3-fill"></i>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="3" class="text-center">Nenhum setor encontrado.</td>
+          </tr>
+        {% endif %}
+      </tbody>
+      
+    </table>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+<div class="container">
+    <!-- Cabeçalho -->
+    <div class="row mb-3">
+        <div class="col d-flex justify-content-between align-items-center">
+            <h2>Estoque</h2>
+            <a class="btn btn-primary" href="{{url_for('novo_lacamento')}}">
+                <i class="bi bi-plus-square"></i> Adicionar Estoque
+            </a>
+        </div>
+    </div>
+
+    <div class="col">
+        <form method="get" action="#">
+            <div class="input-group mb-3">
+                <input type="text" name="search" class="form-control" placeholder="Buscar lojas"
+                    value="{{ termo_busca }}">
+                <button class="btn btn-primary" type="submit">Buscar</button>
+            </div>
+        </form>
+    </div>
+    <!-- Tabela -->
+    <div class="table-responsive overflow-auto">
+        <table class="table table-striped align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Unidade</th>
+                    <th>Produto</th>
+                    <th>Entrada/saida</th>
+                    <th>Quantidade</th>
+                    <th>Técnico</th>
+                    <th>Chamados</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if lista_estoque %}
+                {% for item in lista_estoque %}
+                <tr>
+
+                    <td>{{ item.nome_loja}}</td>
+                    <td>{{ item.nome_produto}}</td>
+                    <td>{{ item.entrada_saida}}</td>
+                    <td>{{ item.qnt}}</td>
+                    <td>{{ item.nome_tecnico}}</td>
+                    <td>{{ item.chamado}}</td>
+                    <td>
+                        <a class="btn btn-primary m-1" href="" title="Editar">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <a class="btn btn-danger m-1" href="" title="Apagar">
+                            <i class="bi bi-trash3-fill"></i>
+                        </a>
+                        
+                        <button 
+                        class="btn btn-info m-1" 
+                        type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#observacao-{{ item.estoque_id }}" 
+                        aria-expanded="false" 
+                        aria-controls="observacao-{{ item.estoque_id }}">
+                        Observação
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="7">
+                    <div 
+                        id="observacao-{{ item.estoque_id }}" 
+                        class="collapse">
+                        {{ item.observacao }}
+                    </div>
+                </td>
+            </tr>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                  <td colspan="3" class="text-center">Nada foi encontrado.</td>
+                </tr>
+              {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

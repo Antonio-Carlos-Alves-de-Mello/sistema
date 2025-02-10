@@ -1,0 +1,25 @@
+{% extends "/template.html" %}
+{% block conteudo %}
+<br>
+<form class="formulariocontatoNovo" action="{{ url_for('salvar_ip')  }}" method="post" enctype="multipart/form-data">
+    <fieldset>
+        {{ form.csrf_token() }}
+        <div class="form-group mb-3">
+            {{form.cnpj.label(class="form-label")}}
+            {{form.cnpj(class="form-select")}}
+            {{form.setor.label(class="form-label")}}
+            {{form.setor(class="form-select")}}
+            {{form.ip.label(class="form-label")}}
+            {{form.ip(class="form-control")}}
+            {{form.maquina.label(class="form-label")}}
+            {{form.maquina(class="form-control")}}
+
+        </div>
+
+        <div class="form-group buttons mb-3">
+            {{ form.salvar(class="btn btn-primary") }}
+            <a class="btn btn-danger" href="{{ url_for('index_ips') }}">Voltar</a>
+        </div>
+    </fieldset>
+</form>
+{% endblock %}

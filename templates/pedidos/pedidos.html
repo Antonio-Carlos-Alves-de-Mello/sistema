@@ -1,0 +1,81 @@
+{% extends "template.html" %}
+{% block conteudo %}
+<div class="container">
+    <!-- Cabeçalho -->
+    <div class="row mb-3">
+        <div class="col d-flex justify-content-between align-items-center">
+            <h2>Pedidos</h2>
+            <a class="btn btn-primary" href="{{url_for('novo_pedido')}}">
+                <i class="bi bi-plus-square"></i> Adicionar 
+            </a>
+            <a class="btn btn-success" href="" target="_blank" title="ABRE UM ARQUIVO PDF NO NAVEGADOR">
+                <i class="bi bi-file-earmark-pdf"></i> Gerar PDF
+            </a>
+            <a class="btn btn-primary" href="{{url_for('pedido_send_email')}}">
+                <i class="bi bi-plus-square"></i> enviar email 
+            </a>
+        </div>
+    </div>
+    <form method="get" action="{{ url_for('index_pedidos') }}">
+        <div class="input-group mb-3">
+            <input type="text" name="search" class="form-control" placeholder="Buscar Pedidos" value="{{ termo_busca }}">
+            <button class="btn btn-primary" type="submit">Buscar</button>
+        </div>
+    </form>
+    <!-- Tabela -->
+    <div class="table-responsive overflow-auto">
+        <table class="table table-striped align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Unidades</th>
+                    <th>Chamados</th>
+                    <th>Produtos</th>
+                    <th>Quantidade</th>
+                    <th>Solicitado</th>
+                    <th>Entregue</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pedido in lista_pedidos %}
+                <tr>
+                    <td>{{ pedido.fantasia }}</td>
+                    <td>{{ pedido.numero_chamado }}</td>
+                    <td>{{ pedido.nome }}</td>
+                    <td>{{ pedido.quantidade }}</td>
+                    <td>{{ pedido.solicitado_em }}</td>
+                    <td>{{ pedido.entregue_em }}</td>
+                    <td>
+                        <a class="btn btn-primary m-1" href="{{ url_for('editar_pedido', id=pedido.id)}}" title="Editar">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <a class="btn btn-danger m-1" href="{{url_for('apagar_pedido', id=pedido.id)}}" title="Apagar">
+                            <i class="bi bi-trash3-fill"></i>
+                        </a>
+                        <!-- Botão para Observação -->
+                        <button 
+                            class="btn btn-info m-1" 
+                            type="button" 
+                            data-bs-toggle="collapse" 
+                            data-bs-target="#observacao-{{ pedido.id }}" 
+                            aria-expanded="false" 
+                            aria-controls="observacao-{{ pedido.id }}">
+                            Observação
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="7">
+                        <div 
+                            id="observacao-{{ pedido.id }}" 
+                            class="collapse">
+                            {{ pedido.observacao }}
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

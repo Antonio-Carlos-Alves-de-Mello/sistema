@@ -1,0 +1,60 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+<div class="row">
+    <div class="col-sm-12 d-flex justify-content-between mb-3">
+        <a class="btn btn-primary" href="{{ url_for('nova_loja')}}"><i class="bi bi-plus-square"></i> Adicionar</a>
+        <a class="btn btn-primary" href="{{url_for('send_email')}}">
+            <i class="bi bi-plus-square"></i> enviar email 
+        </a>
+    </div>
+    <div>
+        <form method="get" action="{{ url_for('index_lojas') }}">
+            <div class="input-group mb-3">
+                <input type="text" name="search" class="form-control" placeholder="Buscar lojas"
+                    value="{{ termo_busca }}">
+                <button class="btn btn-primary" type="submit">Buscar</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-12">
+        <div class="table-responsive overflow-auto">
+            <table class="table table-striped">
+                {% for lojas in lista_lojas %}
+                <tbody class="table-group-divider">
+                    <tr>
+                        <th class="table-primary">Razão Social:</th>
+                        <td>{{ lojas.razao }}</td>
+                        <th class="table-primary">Unidades:</th>
+                        <td>{{ lojas.fantasia }}</td>
+                    </tr>
+                    <tr>
+                        <th class="table-primary">CNPJ:</th>
+                        <td>{{ lojas.cnpj }}</td>
+                        <th class="table-primary">Endereço:</th>
+                        <td>{{ lojas.endereco }}</td>
+                    </tr>
+                    <tr>
+                        <th class="table-primary">Inscrição:</th>
+                        <td>{{ lojas.ie }}</td>
+                        <th class="table-primary">CEP:</th>
+                        <td>{{ lojas.cep }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <a class="btn btn-primary" href="{{ url_for('editar_loja', id=lojas.id) }}"><i
+                                    class="bi bi-pencil-square"></i> Editar</a>
+                        </td>
+                        <td colspan="2">
+                            <a class="btn btn-danger" href="{{ url_for('apagar_loja', id=lojas.id) }}"><i
+                                    class="bi bi-trash3-fill"></i> Excluir</a>
+                        </td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

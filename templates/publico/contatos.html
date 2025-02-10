@@ -1,0 +1,49 @@
+{% extends "index.html" %}
+{% block conteudo %}
+
+<div class="container">
+    <!-- Cabeçalho -->
+       
+    <div class="row">
+        <div class="col">
+            <form method="get" action="#">
+                <div class="input-group mb-3">
+                    <input type="text" name="search" class="form-control" placeholder="Buscar Contatos"
+                        value="{{ termo_busca }}">
+                    <button class="btn btn-primary" type="submit">Buscar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tabela -->
+    <div class="table-responsive overflow-auto">
+        <h3 class="text-primary mb-3">Lista de Contatos</h3>
+        <table class="table table-striped align-middle">
+            <thead class="table-primary">
+                <tr >
+                    <th>Unidade</th>
+                    <th>Setores</th>
+                    <th>Telefones</th>
+                    <th>Tipos</th>
+                    <th>Contatos</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in Lista_contatos %}
+                <tr>
+                    <td>{{ item.fantasia }}</td>
+                    <td>{{ item.setor }}</td>
+                    <td>{{ item.telefone }}</td>
+                    <td>{{ item.tipo }}</td>
+                    <td>{{ item.contato }}</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

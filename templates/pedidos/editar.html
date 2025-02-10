@@ -1,0 +1,47 @@
+{% extends "/template.html" %}
+{% block conteudo %}
+<br>
+<form class="Formulario_pedidos" action="" method="post" enctype="multipart/form-data">
+    <fieldset>
+        <input type="hidden" name="id" value="{{id}}">
+        {{ form.csrf_token() }}
+
+        <div class="form-group mb-3">
+            <div class="form-group mb-3">
+                <!-- CNPJ -->
+                {{ form.cnpj.label(class="form-label") }}
+                {{ form.cnpj(class="form-select") }}
+    
+                <!-- Número do Chamado -->
+                {{ form.N_chamado.label(class="form-label") }}
+                {{ form.N_chamado(class="form-control") }}
+    
+                <!-- Produto -->
+                {{ form.id_produto.label(class="form-label") }}
+                {{ form.id_produto(class="form-control") }}
+    
+                <!-- Quantidade -->
+                {{ form.quantidade.label(class="form-label") }}
+                {{ form.quantidade(class="form-control") }}
+    
+                <!-- Solicitado em -->
+                {{ form.solicitado_em.label(class="form-label") }}
+                {{ form.solicitado_em(class="form-control") }}
+    
+                <!-- Observação -->
+                {{ form.observacao.label(class="form-label") }}
+                {{ form.observacao(class="form-control") }}
+    
+                <!-- Entregue em -->
+                {{ form.entregue_em.label(class="form-label") }}
+                {{ form.entregue_em(class="form-control") }}
+            </div>
+    
+            <div class="form-group buttons mb-3">
+                {{ form.salvar(class="btn btn-primary") }}
+                <a class="btn btn-danger" href="{{ url_for('index_pedidos') }}">Voltar</a>
+            </div>
+        </div>
+    </fieldset>
+</form>
+{% endblock %}

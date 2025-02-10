@@ -1,0 +1,23 @@
+{% extends "/template.html" %}
+{% block conteudo %}
+<br>
+<form class="formularioTecnico" action="" method="post" enctype="multipart/form-data">
+    <fieldset>
+        {{ form.csrf_token() }}
+        <div class="form-group mb-3">
+            {{ form.nome.label(class="form-label") }}
+            {{ form.nome(class="form-control") }}
+            {{ form.email.label(class="form-label") }}
+            {{ form.email( class="form-control")}}
+
+        </div>
+        <div class="form-group buttons mb-3">
+            {{ form.submit(class=" btn btn-primary") }}
+            <a class="btn btn-danger" href="{{ url_for('index_tecnico') }}">Voltar</a>
+        </div>
+    </fieldset>
+
+
+</form>
+
+{% endblock %}

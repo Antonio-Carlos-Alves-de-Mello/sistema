@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+{% block conteudo %}
+<div class="container">
+    <!-- Cabeçalho -->
+    
+    <form method="get" action="{{ url_for('lista_ips') }}">
+        <div class="input-group mb-3">
+            <input type="text" name="search" class="form-control" placeholder="Buscar IPs" value="{{ termo_busca }}">
+            <button class="btn btn-primary" type="submit">Buscar</button>
+        </div>
+    </form>
+    <!-- Tabela -->
+    <div class="table-responsive overflow-auto">
+        <h3 class="text-primary mb-3">Lista de IPs</h3>
+        <table class="table table-striped align-middle">
+            <thead class="table-primary">
+                <tr>
+                    <th>Unidades</th>
+                    <th>Setores</th>
+                    <th>IPs</th>
+                    <th>Nome das Maquinas</th>
+
+                  
+                </tr>
+            </thead>
+            <tbody>
+                {% for ip in lista_ips %}
+                <tr>
+                    
+                    <td>{{ ip.fantasia }}</td>
+                    <td>{{ ip.setor }}</td>
+                    <td>{{ ip.ip }}</td>
+                    <td>{{ ip.maquina }}</td>
+
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

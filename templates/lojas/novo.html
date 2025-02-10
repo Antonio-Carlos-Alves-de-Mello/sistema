@@ -1,0 +1,32 @@
+{% extends "/template.html" %}
+{% block conteudo %}
+<br>
+<form class="FormularioLojas" action="{{ url_for('criar_loja') }}" method="post" enctype="multipart/form-data">
+    <fieldset>
+        
+        {{ form.csrf_token() }}
+
+        <div class="form-group mb-3">
+            {{ form.razao.label(class="form-label") }}
+            {{ form.razao( class="form-control") }}
+            {{ form.fantazia.label(class="form-label") }}
+            {{ form.fantazia( class="form-control") }}
+            {{ form.cnpj.label(class="form-label") }}
+            {{ form.cnpj( class="form-control") }}
+            {{ form.ie.label(class="form-label") }}
+            {{ form.ie( class="form-control") }}
+            {{ form.endereco.label(class="form-label") }}
+            {{ form.endereco( class="form-control") }}
+            {{ form.cep.label(class="form-label") }}
+            {{ form.cep( class="form-control") }}
+        </div>
+
+        <div class="form-group buttons mb-3">
+            {{ form.salvar( class="btn btn-primary") }}
+            <a class="btn btn-danger" href="{{ url_for('index_lojas') }}">Voltar</a>
+        </div>
+    </fieldset>
+</form>
+
+
+{% endblock %}

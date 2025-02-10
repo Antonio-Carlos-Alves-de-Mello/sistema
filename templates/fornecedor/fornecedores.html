@@ -1,0 +1,96 @@
+{% extends "template.html" %} 
+{% block conteudo %}
+
+<div class="container">
+  <!-- Cabeçalho -->
+  <div class="row mb-3">
+    <div class="col d-flex justify-content-between align-items-center">
+      <h2>Fornecedores</h2>
+      <a class="btn btn-primary" href="{{ url_for('novo_fornecedor') }}">
+        <i class="bi bi-plus-square"></i> Adicionar Fornecedor
+      </a>
+    </div>
+  </div>
+
+  <!-- Busca -->
+  <div class="row">
+    <div class="col">
+      <form method="get" action="{{ url_for('index_fornecedores') }}">
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            name="search"
+            class="form-control"
+            placeholder="Buscar fornecedor"
+            value="{{ termo_busca }}"
+          />
+          <button class="btn btn-primary" type="submit">Buscar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Tabela -->
+  <div class="table-responsive overflow-auto">
+    <table class="table table-striped align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Fornecedor</th>
+          <th>Contato</th>
+          <th>Site</th>
+          <th>Telefone</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if Lista_Fornecedores %}
+          {% for item in Lista_Fornecedores %}
+          <tr>
+            <td>{{ item.id }}</td>
+            <td class="w-25">{{ item.nome }}</td>
+            <td>{{ item.nome_contato }}</td>
+            <td>
+              {% if item.site %}
+              <a
+                class="btn btn-primary"
+                href="{{ item.site if 'http' in item.site else 'http://' + item.site }}"
+                target="_blank"
+                title="Visitar Site"
+              >
+                <i class="bi bi-door-open"></i>
+              </a>
+              {% else %}
+              <span class="text-muted">Sem site</span>
+              {% endif %}
+            </td>
+            <td>{{ item.telefone }}</td>
+            <td>
+              <a
+                class="btn btn-primary me-2"
+                href="{{ url_for('editar_Fornecedor', id=item.id) }}"
+                title="Editar"
+              >
+                <i class="bi bi-pencil-square"></i>
+              </a>
+              <a
+                class="btn btn-danger"
+                href="{{ url_for('deletar_fornecedor', id=item.id) }}"
+                title="Apagar"
+              >
+                <i class="bi bi-trash3-fill"></i>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="6" class="text-center">Nenhum fornecedor encontrado.</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
