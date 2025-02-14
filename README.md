@@ -1,6 +1,6 @@
 Descrição
 
-Este é um sistema web desenvolvido em Python utilizando o framework Flask. Ele tem como objetivo [descrever brevemente o objetivo principal do sistema].
+Este é um sistema web desenvolvido em Python utilizando o framework Flask. Ele tem como objetivo ""Controle de estoque , IP, contatos e unidades"" .
 
 Tecnologias Utilizadas
 
